@@ -36,5 +36,26 @@ module.exports = new class main_app {
     )
   }  
 
+  // put object
+  put_object() {
+    S3.putObject(
+      {
+        Bucket: '',
+        Key: '',
+        Body: ''
+      },
+      (error, success) => {
+        if (error) {
+          console.log(error)
+        }
+
+        if (success) {
+          console.log(success) 
+        }
+        else {
+          console.log('Not working properly')
+        }
+      })
+  }
   
 }
