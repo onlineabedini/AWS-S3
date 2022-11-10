@@ -1,9 +1,13 @@
+//  env
+// warning! use .env for AWS access information
+require('dotenv').config()
+
 // AWS 
 const AWS = require('aws-sdk');
  let S3 = new AWS.S3({
-   region: '',
-   accessKeyId: '',
-   secretAccessKey: ''
+   region: process.env.region,
+   accessKeyId: process.env.accessKeyId,
+   secretAccessKey: process.env.secretAccessKey
  });
 
 
@@ -19,7 +23,7 @@ module.exports = new class main_app {
   create_bucket(){
     S3.createBucket(
       {
-        Bucket: 'onl_bucket'
+        Bucket: 'onl_bucket_create'
       },
       (error, success) => {
         if (error) {
