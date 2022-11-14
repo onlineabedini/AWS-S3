@@ -1,20 +1,23 @@
+
 //  env
 // warning! use .env for AWS access information
 require('dotenv').config()
 
 // AWS 
-const AWS = require('aws-sdk');
- let S3 = new AWS.S3({
-   region: process.env.region,
-   accessKeyId: process.env.accessKeyId,
-   secretAccessKey: process.env.secretAccessKey
- });
+var AWS = require('aws-sdk');
+var AWS = require('aws-sdk/global');
 
+ let S3 = new AWS.S3({
+   region: process.env['REGION'],
+   accessKeyId: process.env['AWS_ACCESS_KEY'],
+   secretAccessKey: process.env['AWS_SECRET_KEY']
+ });
 
 module.exports = new class main_app {
   constructor() {
     // 
     console.log('application1 is running')
+    this.create_bucket()
   }
 
   // S3 functions -------
@@ -23,7 +26,7 @@ module.exports = new class main_app {
   create_bucket(){
     S3.createBucket(
       {
-        Bucket: 'onl_bucket_create'
+        Bucket: 'poc-create-buckets'
       },
       (error, success) => {
         if (error) {
@@ -40,6 +43,8 @@ module.exports = new class main_app {
     )
   }  
 
+
+  // object--------------------------------
   // put object
   put_object() {
     S3.putObject(
@@ -61,5 +66,8 @@ module.exports = new class main_app {
         }
       })
   }
-  
+
+  del_object() {
+    // 
+  }
 }
